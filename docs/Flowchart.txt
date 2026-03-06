@@ -1,0 +1,73 @@
+Notebook Workflow (Model Building)
+==================================
+1. Import the required packages
+   - torch, torchvision, timm, numpy, pandas, matplotlib, etc.
+
+2. Load the Dataset
+   - Use facial emotion dataset 
+   - Split into training and testing sets
+
+3. Preprocessing
+   - Resize images to fixed size 
+   - Apply data augmentation (flip, rotation, normalization)
+   - Convert to tensors
+   - Normalize pixel values
+
+4. Build and Train Models
+   - CNN
+   - Vision Transformer (ViT)
+   - CNN + ViT hybrid
+   - Xception model
+
+5. Evaluate Models
+   - Calculate accuracy, precision, recall, and F1-score
+   - Compare all models based on performance
+
+6. Save the Best Model
+   - Save trained model as 'xception_emotion.pth'
+
+7. Explainable AI (XAI)
+   - Apply GradCAM to visualize important regions
+   - Apply LIME for local interpretability
+   - Apply SHAP for feature contribution explanation
+
+8. Visualize Results
+   - Plot model performance comparison graphs (accuracy, F1-score)
+   - Display example visualizations for XAI outputs
+
+
+Frontend Workflow (Flask Application)
+=====================================
+1. Setup Flask Environment
+2. Load Model and Utilities
+   - Load trained 'xception_emotion.pth'
+   - Define image transforms and class labels
+   - Initialize dlib for face detection
+
+3. Create Core Functionalities
+   - Predict emotion from uploaded image
+   - Generate GradCAM, LIME, and SHAP visualizations
+   - Display prediction probabilities and explanations
+
+4. Realtime Detection
+   - Access webcam using OpenCV
+   - Detect faces, predict emotion in real-time
+   - Overlay GradCAM and LIME on video feed
+   - Display FPS and status
+
+5. LIME Background Worker
+   - Run LIME asynchronously for smoother performance
+   - Update LIME results periodically
+
+6. User Authentication
+   - Create Signup and Signin pages using Flask + SQLite
+   - Validate input fields on server-side (regex patterns)
+   - Restrict access to main app until login
+
+7. Upload Image Interface
+   - Allow user to upload an image
+   - Predict emotion and show GradCAM, LIME, SHAP results on a result page
+
+
+
+
