@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Real Time Face Emotion Detection - Realtime View</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="face emotion detection, deep learning, computer vision, AI, real-time emotion analysis, facial recognition, machine learning" name="keywords">
+    <meta content="Real-time face emotion detection using advanced deep learning algorithms for live facial expression recognition and analysis." name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    
+    <!-- Realtime Page Custom Stylesheet -->
+    <link href="../static/css/realtime.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-secondary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar p-0">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0"
+        >
+          <a href="/home" class="navbar-brand p-0">
+            <h1 class="display-5 text-secondary m-0">
+              <i class="fas fa-smile text-primary me-2"></i>EmotionAI
+            </h1>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+          >
+            <span class="fa fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+              <a href="/home" class="nav-item nav-link">Home</a>
+              <div class="nav-item dropdown">
+                  <a href="/home" class="nav-link" data-bs-toggle="dropdown"
+                    ><span class="dropdown-toggle">Detection</span></a
+                  >
+                  <div class="dropdown-menu m-0">
+                    <a href="/home1" class="dropdown-item">Image Detection</a>
+                    <a href="/realtime" class="dropdown-item">Real Time Detection</a>
+                  </div>
+                </div>
+            </div>
+            <a
+              href="/"
+              class="btn btn-primary border-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"
+              >Log Out</a
+            >
+          </div>
+        </nav>
+      </div>
+      <!-- Navbar & Hero End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="text-white display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Realtime Emotion Detection</h3>
+            <ol class="breadcrumb justify-content-center text-white mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="/home" class="text-white">Home</a></li>
+                <li class="breadcrumb-item active text-secondary">Realtime View</li>
+            </ol>    
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Realtime Detection Section Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="realtime-container">
+                        <!-- Video Stream Section -->
+                        <div class="video-section">
+                            <div class="video-header text-center mb-4">
+                                <h2 class="display-6 text-secondary mb-3">
+                                    <i class="fas fa-video text-primary me-3"></i>Live Emotion Detection
+                                </h2>
+                                <p class="text-muted">Real-time facial emotion recognition and analysis</p>
+                            </div>
+                            
+                            <!-- Controls Section - Moved to top -->
+                            <div class="controls-section mb-4">
+                                <div class="controls-header text-center mb-4">
+                                    <h3 class="text-secondary mb-3">
+                                        <i class="fas fa-sliders-h text-primary me-2"></i>Detection Controls
+                                    </h3>
+                                    <p class="text-muted">Control real-time emotion detection features</p>
+                            </div>
+                            
+                            <div class="controls-grid">
+                                    <button id="start" class="control-btn start-btn">
+                                    <i class="fas fa-play me-2"></i>
+                                        <span>Start</span>
+                                </button>
+                                
+                                    <button id="stop" class="control-btn stop-btn">
+                                    <i class="fas fa-stop me-2"></i>
+                                        <span>Stop</span>
+                                </button>
+                                
+                                    <button id="toggle" class="control-btn toggle-btn">
+                                    <i class="fas fa-eye me-2"></i>
+                                    <span>Toggle LIME</span>
+                                </button>
+                                
+                                    <a href="/" class="control-btn home-btn">
+                                        <i class="fas fa-home me-2"></i>
+                                        <span>Home</span>
+                                </a>
+                            </div>
+                        </div>
+
+                            <div class="video-wrapper-full">
+                                <div class="video-container-full">
+                                    <img id="stream" src="/video_feed" alt="Video stream" class="video-stream-full">
+                                    <div class="video-overlay">
+                                        <div class="detection-indicator">
+                                            <i class="fas fa-eye text-success"></i>
+                                            <span>Detection Active</span>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Section -->
+                        <div class="status-section">
+                            <div class="status-container">
+                                <h4 class="status-title">
+                                    <i class="fas fa-info-circle text-primary me-2"></i>System Status
+                                </h4>
+                                <div id="info" class="status-message">
+                                    <i class="fas fa-circle text-secondary me-2"></i>
+                                    <span>Status: idle</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Realtime Detection Section End -->
+
+
+    
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-white"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Real Time Face Emotion Detection</a>, All right reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end text-white">
+                    Designed By <a class="border-bottom text-white" href="#">Face Emotion Detection System</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/wow/wow.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/waypoints/waypoints.min.js"></script>
+    <script src="../static/lib/counterup/counterup.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+
+    <!-- Realtime Page JavaScript -->
+    <script>
+        // API Functions (exact match to app.py reference)
+        async function call(path) {
+            try { const r = await fetch(path, { method:'POST' }); return await r.json(); }
+            catch(e){ return { error:true }; }
+        }
+
+        // Control Functions (exact match to app.py reference)
+        document.getElementById('start').onclick = async () => { 
+            const j = await call('/start_realtime'); 
+            document.getElementById('info').innerText = "Status: " + (j.status || JSON.stringify(j));
+            startSessionTimer();
+        };
+
+        document.getElementById('stop').onclick = async () => { 
+            const j = await call('/stop_realtime'); 
+            document.getElementById('info').innerText = "Status: " + (j.status || JSON.stringify(j));
+            stopSessionTimer();
+        };
+
+        document.getElementById('toggle').onclick = async () => { 
+            const j = await call('/toggle_lime'); 
+            document.getElementById('info').innerText = "LIME: " + (j.lime_enabled);
+        };
+
+        // Session Timer
+        let sessionStartTime = null;
+        let sessionTimer = null;
+
+        function startSessionTimer() {
+            sessionStartTime = new Date();
+            sessionTimer = setInterval(updateSessionTime, 1000);
+        }
+
+        function stopSessionTimer() {
+            if (sessionTimer) {
+                clearInterval(sessionTimer);
+                sessionTimer = null;
+            }
+        }
+
+        function updateSessionTime() {
+            if (sessionStartTime) {
+                const now = new Date();
+                const diff = Math.floor((now - sessionStartTime) / 1000);
+                const minutes = Math.floor(diff / 60);
+                const seconds = diff % 60;
+                document.getElementById('sessionTime').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Real emotion data from app.py backend (for statistics only)
+        function fetchEmotionData() {
+            fetch('/get_emotion_data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        // Update confidence with real data
+                        if (data.confidence) {
+                            document.getElementById('confidence').textContent = `${Math.round(data.confidence * 100)}%`;
+                        }
+
+                        // Update FPS with real data
+                        if (data.fps) {
+                            document.getElementById('fps').textContent = Math.round(data.fps);
+                        }
+
+                        // Update detection count
+                        if (data.detectionCount) {
+                            document.getElementById('detectionCount').textContent = data.detectionCount;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log('No emotion data available yet');
+                });
+        }
+
+        // Fetch real emotion data every 500ms
+        setInterval(fetchEmotionData, 500);
+
+        // Video stream error handling
+        document.getElementById('stream').onerror = function() {
+            this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQwIiBoZWlnaHQ9IjQ4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzZjNzU3ZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNhbWVyYSBOb3QgQXZhaWxhYmxlPC90ZXh0Pjwvc3ZnPg==';
+        };
+    </script>
+</body>
+
+</html>

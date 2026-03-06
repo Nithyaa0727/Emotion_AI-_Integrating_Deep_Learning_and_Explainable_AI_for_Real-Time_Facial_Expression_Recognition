@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Emotion Detection Results - Analysis Complete</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="face emotion detection, deep learning, computer vision, AI, emotion analysis results, facial recognition, machine learning" name="keywords">
+    <meta content="Emotion detection analysis results using advanced deep learning algorithms for facial expression recognition and interpretation." name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    
+    <!-- Results Page Custom Stylesheet -->
+    <link href="../static/css/results.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-secondary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar p-0">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0"
+        >
+          <a href="/home" class="navbar-brand p-0">
+            <h1 class="display-5 text-secondary m-0">
+              <i class="fas fa-smile text-primary me-2"></i>EmotionAI
+            </h1>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+          >
+            <span class="fa fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+              <a href="/home" class="nav-item nav-link">Home</a>
+              <div class="nav-item dropdown">
+                  <a href="/home" class="nav-link" data-bs-toggle="dropdown"
+                    ><span class="dropdown-toggle">Detection</span></a
+                  >
+                  <div class="dropdown-menu m-0">
+                    <a href="/home1" class="dropdown-item">Image Detection</a>
+                    <a href="/realtime" class="dropdown-item">Real Time Detection</a>
+                  </div>
+                </div>
+            </div>
+            <a
+              href="/"
+              class="btn btn-primary border-secondary rounded-pill py-2 px-4 px-lg-3 mb-3 mb-md-3 mb-lg-0"
+              >Log Out</a
+            >
+          </div>
+        </nav>
+      </div>
+      <!-- Navbar & Hero End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="text-white display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Analysis Results</h3>
+            <ol class="breadcrumb justify-content-center text-white mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                <li class="breadcrumb-item"><a href="/upload" class="text-white">Upload</a></li>
+                <li class="breadcrumb-item active text-secondary">Results</li>
+            </ol>    
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Results Section Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="results-container">
+                        <!-- Results Header -->
+                        <div class="results-header text-center mb-5">
+                            <h2 class="display-6 text-secondary mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>Analysis Complete
+                            </h2>
+                            <p class="text-muted">Your image has been successfully analyzed using advanced deep learning techniques</p>
+                        </div>
+
+                        <!-- Emotion Detection Result -->
+                        <div class="emotion-result-section mb-5">
+                            <div class="result-card">
+                                <div class="result-header">
+                                    <h3 class="result-title">
+                                        <i class="fas fa-brain text-primary me-2"></i>Detected Emotion
+                                    </h3>
+                                </div>
+                                <div class="emotion-display">
+                                    <div class="emotion-icon">
+                                        {% if emotion == 'happy' %}
+                                            <i class="fas fa-smile text-success"></i>
+                                        {% elif emotion == 'sad' %}
+                                            <i class="fas fa-frown text-primary"></i>
+                                        {% elif emotion == 'angry' %}
+                                            <i class="fas fa-angry text-danger"></i>
+                                        {% elif emotion == 'fearful' %}
+                                            <i class="fas fa-surprise text-warning"></i>
+                                        {% elif emotion == 'surprised' %}
+                                            <i class="fas fa-surprise text-info"></i>
+                                        {% elif emotion == 'disgusted' %}
+                                            <i class="fas fa-meh text-secondary"></i>
+                                        {% else %}
+                                            <i class="fas fa-meh-blank text-muted"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="emotion-text">
+                                        <h1 class="emotion-label">{{ emotion.title() }}</h1>
+                                        <p class="emotion-description">Primary emotion detected in the image</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Visualizations -->
+                        <div class="visualizations-section">
+                            <div class="section-header text-center mb-4">
+                                <h3 class="text-secondary mb-3">
+                                    <i class="fas fa-chart-line text-primary me-2"></i>Analysis Visualizations
+                                </h3>
+                                <p class="text-muted">Detailed explanations of the emotion detection process</p>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Grad-CAM Visualization -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="visualization-card">
+                                        <div class="viz-header">
+                                            <h4 class="viz-title">
+                                                <i class="fas fa-camera text-primary me-2"></i>Grad-CAM
+                                            </h4>
+                                            <p class="viz-description">Gradient-weighted Class Activation Mapping</p>
+                                        </div>
+                                        <div class="viz-image-container">
+                                            {% if grad_path %}
+                                                <img src="{{ grad_path }}" alt="Grad-CAM Visualization" class="viz-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                <div class="viz-placeholder" style="display:none;">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                    <p>Grad-CAM image not found</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="viz-placeholder">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                    <p>No Grad-CAM available</p>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="viz-info">
+                                            <p class="viz-explanation">
+                                                Shows which parts of the image the model focuses on for emotion detection.
+                                                Red areas indicate high importance for the predicted emotion.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- LIME Visualization -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="visualization-card">
+                                        <div class="viz-header">
+                                            <h4 class="viz-title">
+                                                <i class="fas fa-search text-primary me-2"></i>LIME
+                                            </h4>
+                                            <p class="viz-description">Local Interpretable Model-agnostic Explanations</p>
+                                        </div>
+                                        <div class="viz-image-container">
+                                            {% if lime_path %}
+                                                <img src="{{ lime_path }}" alt="LIME Visualization" class="viz-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                <div class="viz-placeholder" style="display:none;">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                    <p>LIME image not found</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="viz-placeholder">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                    <p>No LIME available</p>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="viz-info">
+                                            <p class="viz-explanation">
+                                                Explains individual predictions by highlighting important image regions.
+                                                Green areas support the prediction, red areas oppose it.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SHAP Visualization -->
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="visualization-card">
+                                        <div class="viz-header">
+                                            <h4 class="viz-title">
+                                                <i class="fas fa-chart-bar text-primary me-2"></i>SHAP
+                                            </h4>
+                                            <p class="viz-description">SHapley Additive exPlanations</p>
+                                        </div>
+                                        <div class="viz-image-container">
+                                            {% if shap_path %}
+                                                <img src="{{ shap_path }}" alt="SHAP Visualization" class="viz-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                <div class="viz-placeholder" style="display:none;">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                    <p>SHAP image not found</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="viz-placeholder">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                    <p>No SHAP available</p>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="viz-info">
+                                            <p class="viz-explanation">
+                                                Provides comprehensive model interpretability by showing feature importance.
+                                                Warmer colors indicate higher contribution to the prediction.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons text-center mt-5">
+                            <a href="/upload" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-upload me-2"></i>Analyze Another Image
+                            </a>
+                            <a href="/realtime" class="btn btn-secondary btn-lg me-3">
+                                <i class="fas fa-video me-2"></i>Real-Time Detection
+                            </a>
+                            <a href="/" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-home me-2"></i>Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Results Section End -->
+
+
+    
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-white"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Real Time Face Emotion Detection</a>, All right reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end text-white">
+                    Designed By <a class="border-bottom text-white" href="#">Face Emotion Detection System</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/wow/wow.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/waypoints/waypoints.min.js"></script>
+    <script src="../static/lib/counterup/counterup.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+
+</body>
+
+</html>
